@@ -20,7 +20,6 @@ static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-/* >>>>>>> */
 };
 
 /* tagging */
@@ -84,6 +83,8 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
+#include "shiftview.c"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,		                XK_d,	   spawn,          {.v = dmenucmd } },
@@ -93,9 +94,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_comma,  setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_period, setmfact,       {.f = +0.05} },
+	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,						XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -105,13 +106,15 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_h,      focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_l,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_h,      tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_l,      tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+	{ MODKEY|ControlMask,           XK_h,  	   shiftview,      {.i = -1  } },
+	{ MODKEY|ControlMask,           XK_l,  	   shiftview,      {.i = +1  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
