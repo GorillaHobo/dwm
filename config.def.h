@@ -1,12 +1,12 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
+static unsigned int snap      = 100;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 0;        /* 0 means bottom bar */
+static int topbar             = 1;        /* 0 means bottom bar */
 
 static const char *fonts[]          = { "Cascadia Mono:size=9:", "Font Awesome:size=9", "monospace:size=9" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -23,7 +23,7 @@ static char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "", "", "", "", "" };
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 
 static const Rule rules[] = {
@@ -31,11 +31,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
-	{ "ncmpcpp", NULL,     NULL,           0,         1,          0,           1,        0 },
+	/* class				instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Vivaldi-stable",		NULL,     NULL,           1<<1,      0,          0,           0,        -1 },
+	{ "St",					NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,					NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ "ncmpcpp", 			NULL,     NULL,           1<<4,      1,          0,           0,        0 },
+	{ "htop",	 			NULL,     NULL,           0,         1,          0,           0,        0 },
 };
 
 /* layout(s) */
@@ -98,14 +99,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_comma,  setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_period, setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
+	{ MODKEY,			            XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,						XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_p,      setlayout,      {0} },
+	{ MODKEY|ShiftMask,             XK_p,      togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_h,      focusmon,       {.i = -1 } },
