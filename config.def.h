@@ -8,7 +8,7 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 0;        /* 0 means bottom bar */
 
-static const char *fonts[]          = { "monospace:size=10" };
+static const char *fonts[]          = { "Cascadia Mono:size=9:", "Font Awesome:size=9", "monospace:size=9" };
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -23,7 +23,8 @@ static char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
+/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -34,6 +35,7 @@ static const Rule rules[] = {
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ "ncmpcpp", NULL,     NULL,           0,         1,          0,           1,        0 },
 };
 
 /* layout(s) */
@@ -87,7 +89,7 @@ ResourcePref resources[] = {
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,		                XK_d,	   spawn,          {.v = dmenucmd } },
+	/* { MODKEY,		                XK_d,	   spawn,          {.v = dmenucmd } }, */
 	{ MODKEY,			            XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -110,8 +112,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_h,      tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = -4 } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = +4 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	{ MODKEY|ControlMask,           XK_h,  	   shiftview,      {.i = -1  } },
 	{ MODKEY|ControlMask,           XK_l,  	   shiftview,      {.i = +1  } },
